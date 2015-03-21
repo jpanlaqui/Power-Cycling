@@ -35,14 +35,14 @@
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.progressBar3 = new System.Windows.Forms.ProgressBar();
             this.progressBar4 = new System.Windows.Forms.ProgressBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtT1Count = new System.Windows.Forms.TextBox();
+            this.txtT2Count = new System.Windows.Forms.TextBox();
+            this.txtT3Count = new System.Windows.Forms.TextBox();
+            this.txtCycleSet = new System.Windows.Forms.TextBox();
+            this.txtT1Set = new System.Windows.Forms.TextBox();
+            this.txtT2Set = new System.Windows.Forms.TextBox();
+            this.txtT3Set = new System.Windows.Forms.TextBox();
+            this.txtCycleCount = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnMonitor
@@ -104,79 +104,87 @@
             this.progressBar4.Size = new System.Drawing.Size(540, 14);
             this.progressBar4.TabIndex = 2;
             // 
-            // textBox1
+            // txtT1Count
             // 
-            this.textBox1.Location = new System.Drawing.Point(51, 104);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtT1Count.Location = new System.Drawing.Point(51, 104);
+            this.txtT1Count.Name = "txtT1Count";
+            this.txtT1Count.ReadOnly = true;
+            this.txtT1Count.Size = new System.Drawing.Size(100, 20);
+            this.txtT1Count.TabIndex = 3;
+            this.txtT1Count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox2
+            // txtT2Count
             // 
-            this.textBox2.Location = new System.Drawing.Point(233, 104);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 3;
+            this.txtT2Count.Location = new System.Drawing.Point(233, 104);
+            this.txtT2Count.Name = "txtT2Count";
+            this.txtT2Count.ReadOnly = true;
+            this.txtT2Count.Size = new System.Drawing.Size(100, 20);
+            this.txtT2Count.TabIndex = 3;
+            this.txtT2Count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox3
+            // txtT3Count
             // 
-            this.textBox3.Location = new System.Drawing.Point(415, 104);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 3;
+            this.txtT3Count.Location = new System.Drawing.Point(415, 104);
+            this.txtT3Count.Name = "txtT3Count";
+            this.txtT3Count.ReadOnly = true;
+            this.txtT3Count.Size = new System.Drawing.Size(100, 20);
+            this.txtT3Count.TabIndex = 3;
+            this.txtT3Count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox4
+            // txtCycleSet
             // 
-            this.textBox4.Location = new System.Drawing.Point(233, 170);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 3;
+            this.txtCycleSet.Location = new System.Drawing.Point(233, 170);
+            this.txtCycleSet.Name = "txtCycleSet";
+            this.txtCycleSet.Size = new System.Drawing.Size(100, 20);
+            this.txtCycleSet.TabIndex = 3;
+            this.txtCycleSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox5
+            // txtT1Set
             // 
-            this.textBox5.Location = new System.Drawing.Point(51, 78);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 3;
+            this.txtT1Set.Location = new System.Drawing.Point(51, 78);
+            this.txtT1Set.Name = "txtT1Set";
+            this.txtT1Set.Size = new System.Drawing.Size(100, 20);
+            this.txtT1Set.TabIndex = 3;
+            this.txtT1Set.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox6
+            // txtT2Set
             // 
-            this.textBox6.Location = new System.Drawing.Point(233, 78);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 3;
+            this.txtT2Set.Location = new System.Drawing.Point(233, 78);
+            this.txtT2Set.Name = "txtT2Set";
+            this.txtT2Set.Size = new System.Drawing.Size(100, 20);
+            this.txtT2Set.TabIndex = 3;
+            this.txtT2Set.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox7
+            // txtT3Set
             // 
-            this.textBox7.Location = new System.Drawing.Point(415, 78);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 3;
+            this.txtT3Set.Location = new System.Drawing.Point(415, 78);
+            this.txtT3Set.Name = "txtT3Set";
+            this.txtT3Set.Size = new System.Drawing.Size(100, 20);
+            this.txtT3Set.TabIndex = 3;
+            this.txtT3Set.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox8
+            // txtCycleCount
             // 
-            this.textBox8.Location = new System.Drawing.Point(233, 196);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 3;
+            this.txtCycleCount.Location = new System.Drawing.Point(233, 196);
+            this.txtCycleCount.Name = "txtCycleCount";
+            this.txtCycleCount.ReadOnly = true;
+            this.txtCycleCount.Size = new System.Drawing.Size(100, 20);
+            this.txtCycleCount.TabIndex = 3;
+            this.txtCycleCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmPowerCycling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(566, 283);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtCycleCount);
+            this.Controls.Add(this.txtCycleSet);
+            this.Controls.Add(this.txtT3Set);
+            this.Controls.Add(this.txtT3Count);
+            this.Controls.Add(this.txtT2Set);
+            this.Controls.Add(this.txtT2Count);
+            this.Controls.Add(this.txtT1Set);
+            this.Controls.Add(this.txtT1Count);
             this.Controls.Add(this.progressBar3);
             this.Controls.Add(this.progressBar2);
             this.Controls.Add(this.progressBar4);
@@ -201,14 +209,14 @@
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.ProgressBar progressBar3;
         private System.Windows.Forms.ProgressBar progressBar4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txtT1Count;
+        private System.Windows.Forms.TextBox txtT2Count;
+        private System.Windows.Forms.TextBox txtT3Count;
+        private System.Windows.Forms.TextBox txtCycleSet;
+        private System.Windows.Forms.TextBox txtT1Set;
+        private System.Windows.Forms.TextBox txtT2Set;
+        private System.Windows.Forms.TextBox txtT3Set;
+        private System.Windows.Forms.TextBox txtCycleCount;
     }
 }
 
