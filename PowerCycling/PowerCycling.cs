@@ -29,9 +29,27 @@ namespace PowerCycling
         {
 
             int port;
+            int handle;
+            ushort readData;
+
+                
 
             Aardvark OpenConnection = new Aardvark();
             port = OpenConnection.Aadetect(txtMessageCentre);
+            OpenConnection.InitAardvark(port, txtMessageCentre);
+
+
+            AardvarkApi.aa_close(port);
+            handle = AardvarkApi.aa_open(port);
+
+            ReadWriteData I2CRead = new ReadWriteData();
+
+            readData = I2CRead.ReadData(handle,
+                                              Aardvark.I2C_ADDRESS,
+                                              (byte)Aardvark.I2CCommands.PC_T1_SET_LSB_CMD);
+
+            txtMessageCentre.Text = readData.ToString();
+
 
         }
     }

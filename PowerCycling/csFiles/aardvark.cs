@@ -1291,6 +1291,11 @@ private static extern int net_aa_gpio_set (int aardvark, byte value);
 private static extern int net_aa_gpio_change (int aardvark, ushort timeout);
 
 
+
+internal static void aa_i2c_write(int handle, byte slaveAddress, byte aa_i2c_flags, int[] command)
+{
+    throw new NotImplementedException();
+}
 } // class AardvarkApi
 
 } // namespace TotalPhase

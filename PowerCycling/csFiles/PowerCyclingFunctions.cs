@@ -8,10 +8,12 @@ namespace PowerCyclingFunctions
 {
     class Aardvark
     {
+        public const byte I2C_ADDRESS = 0x5C;   //MCU I2C address
+
         /*=========================================================================
         | I2C Power Cycling Command Registers
         ========================================================================*/
-        public enum I2CCommands: int
+        public enum I2CCommands: byte
         {
             PC_T1_COUNT_LSB_CMD     = 0x20,		//Power ON duration (LSB) before power OFF command
             PC_T1_COUNT_MSB_CMD    	= 0x21, 	//Power ON duration (MSB)before power OFF command
@@ -70,7 +72,7 @@ namespace PowerCyclingFunctions
                     // Display device port number, in-use status, and serial number
                     uint id = unchecked((uint)uniqueIds[i]);
 
-                   txtMessageCentre.Text += "  port = " + ports[i] + ", " + status + 
+                   txtMessageCentre.Text += "     port = " + ports[i] + ", " + status + 
 											" (" + id/1000000 + "-" + id%1000000 + ")" + "\r\n";
                     port = ports[i];
                 } 
@@ -89,7 +91,11 @@ namespace PowerCyclingFunctions
             int handle;
             const int bitrate = 100;
 
-            txtMessageCentre.Text += "Aardvark Handle: " + port + "\r\n";
+            txtMessageCentre.Text += "Aardvark Handle: " + port + "\r";
+            txtMessageCentre.SelectionStart = txtMessageCentre.Text.Length;
+            txtMessageCentre.ScrollToCaret();
+            txtMessageCentre.Refresh();
+            
             if (port != 99)
             {
                 //Get the handle number of the Aardvark I2C/SPI adapter
@@ -111,34 +117,107 @@ namespace PowerCyclingFunctions
             {
                 txtMessageCentre.Text += "No Aardvark controller is connected!" + "\r\n";
                 txtMessageCentre.Text += "Please connect the controller." + "\r\n";
+
             }
+        }
+
+        /*=========================================================================
+        | Auto detect Aardvark controller
+         ========================================================================*/
+        public void InitI2CConnection()
+        {
+                int handle;
+                int numElem = 16;
+                const int bitrate = 100;
+
+                int count = AardvarkApi.aa_find_devices_ext(numElem, ports, numElem, uniqueIds);
+                if (count != 0)
+                {
+                    //Get the handle number of the Aardvark I2C/SPI adapter
+                    handle = AardvarkApi.aa_open(port);
+
+                    //Set the pull-up of the I2C/SPI Aardvark adapter to none
+                    AardvarkApi.aa_i2c_pullup(handle, AardvarkApi.AA_I2C_PULLUP_NONE);
+
+                    //Set the configuration to I2C/SPI mode
+                    AardvarkApi.aa_configure(handle, AardvarkConfig.AA_CONFIG_SPI_I2C);
+
+                    //Configure the target power pins
+                    AardvarkApi.aa_target_power(handle, AardvarkApi.AA_TARGET_POWER_NONE);
+
+                    //Configure the bit rate
+                    AardvarkApi.aa_i2c_bitrate(handle, bitrate);
+                }
+
+
+
+
 
         }
     }
 
-    class ReadWriteParameters
+    class ReadWriteData
     {
-        public int length;
-        public int width;
-        //constructor : method that has the same name as the class. // executes when an object is created.
-       
-        
-        public void ReadParameters()
-        { 
+        private const byte bytesReceived = 2;
+        //private int handle;
+        private ushort slaveAddress;
+        private byte[] command;
+
+        public ushort ReadData(int handle, byte slaveAddress, byte command)
+        {
+            ushort dataRead;
+            const ushort numberOfBytes = 2;
+            ushort dataReadTemp;
+            byte[] dataOut = new byte[2];
+            byte[] dataIn = new byte[2];
+            dataOut[0] = command;
+
+            Aardvark OpenConnection = new Aardvark();
+            port = OpenConnection.Aadetect(txtMessageCentre);
+            OpenConnection.InitAardvark(port, txtMessageCentre);
+
+
+
+            //Write the I2C address and 1-byte of command
+            AardvarkApi.aa_i2c_write(handle, slaveAddress,
+                                     AardvarkI2cFlags.AA_I2C_NO_STOP,
+                                     numberOfBytes, dataOut);
+
+            //Write the I2C address and read 2-bytes of data
+            AardvarkApi.aa_i2c_read(handle, slaveAddress,
+                                    AardvarkI2cFlags.AA_I2C_NO_FLAGS,
+                                    numberOfBytes, dataIn);
+
+            dataReadTemp = (ushort)(dataIn[0] & 0x00FF);
+            dataReadTemp = (ushort)(dataIn[0] << 8);
+
+            dataRead = dataReadTemp;
  
-            Console.WriteLine("Constructor fired"); 
+            return dataRead;
         }
 
-        public void WriteParameters() 
+        public void WriteParameters(int handle, byte slaveAddress, byte command) 
         {
+           // int dataRead;
+           // const ushort numberOfBytes = 2;
+           // byte[] dataOut = null;
+           // short i, n;
+
+           // int count, i;
+           // byte[] dataOut = { addr };
+           // byte[] dataIn = new byte[length];
 
 
+           // dataOut[0] = command;
+           // AardvarkApi.aa_i2c_write(handle, slaveAddress,
+           //                          AardvarkI2cFlags.AA_I2C_NO_FLAGS,
+           //                          numberOfBytes, dataOut);
+           // AardvarkApi.aa_sleep_ms(10);
+
+            int x = 10;
 
 
-
-
-
-            Console.WriteLine("Constructor fired"); 
+           //return dataWrite;
         }
     }
 
