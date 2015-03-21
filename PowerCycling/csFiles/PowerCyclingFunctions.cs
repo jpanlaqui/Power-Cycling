@@ -21,7 +21,7 @@ namespace PowerCyclingFunctions
             PC_T3_COUNT_MSB_CMD    	= 0x25, 	//Power ON duration (MSB) after power OFF command
             PC_COUNT_LSB_CMD        = 0x26,		//Number of power cycling command (LSB)
             PC_COUNT_MSB_CMD        = 0x27, 	//Number of power cycling command (MSB)
-            PC_STATUS_CMD           = 0x28, 	//Power cylcing status register
+            PC_STATUS_CMD           = 0x28, 	//Power cycling status register
             PC_T1_SET_LSB_CMD       = 0x29, 	//Power ON duration set (LSB) before power OFF command
             PC_T1_SET_MSB_CMD       = 0x2A, 	//Power ON duration set (MSB)before power OFF command
             PC_T2_SET_LSB_CMD       = 0x2B, 	//Power OFF duration set (LSB) command
@@ -31,7 +31,7 @@ namespace PowerCyclingFunctions
             PC_COUNT_SET_LSB_CMD    = 0x2F, 	//Number of power set cycling command (LSB)
             PC_COUNT_SET_MSB_CMD    = 0x30, 	//Number of power set cycling command (MSB)
             PC_RESET_CMD            = 0x31, 	//Reset/set counts and enable/disable MOSFET
-            PC_INCDEC_MODE_CMD      = 0x32, 	//Enable/disable inc/dec dropout test
+            PC_INCDEC_MODE_CMD      = 0x32, 	//Enable/disable inc/dec drop-out test
             CALIBRATION_CMD         = 0x70,		//Allow EEPROM write
             CALIBRATION_ACTIVE      = 0xAA,	    //Allow EEPROM write
             CALIBRATION_DONE        = 0xCC,	    //Save data received to EEPROM
@@ -52,7 +52,7 @@ namespace PowerCyclingFunctions
 
             int count = AardvarkApi.aa_find_devices_ext(numElem, ports, numElem, uniqueIds);
 
-            txtMessageCentre.Text += count + " device(s) found!" + "\n";
+            txtMessageCentre.Text += count + " device(s) found!" + "\r\n";
 
             if (count != 0)
             {
@@ -70,11 +70,8 @@ namespace PowerCyclingFunctions
                     // Display device port number, in-use status, and serial number
                     uint id = unchecked((uint)uniqueIds[i]);
 
-                   txtMessageCentre.Text += "  port = " + ports[i] + ", " + -(id/1000000) + 
-                       ", " + status + "\n";
-                    //Console.WriteLine("    port={0,-3} {1} ({2:d4}-{3:d6})",
-                    //                  ports[i], status, id / 1000000,
-                    //                  id % 1000000);
+                   txtMessageCentre.Text += "  port = " + ports[i] + ", " + status + 
+											" (" + id/1000000 + "-" + id%1000000 + ")" + "\r\n";
                     port = ports[i];
                 } 
             }
@@ -92,7 +89,7 @@ namespace PowerCyclingFunctions
             int handle;
             const int bitrate = 100;
 
-            txtMessageCentre.Text += "Aardvark Handle: " + port + "\n";
+            txtMessageCentre.Text += "Aardvark Handle: " + port + "\r\n";
             if (port != 99)
             {
                 //Get the handle number of the Aardvark I2C/SPI adapter
@@ -112,8 +109,8 @@ namespace PowerCyclingFunctions
             }
             else
             {
-                txtMessageCentre.Text += "No Aardvark controller is connected!" + "\n";
-                txtMessageCentre.Text += "Please connect the controller." + "\n";
+                txtMessageCentre.Text += "No Aardvark controller is connected!" + "\r\n";
+                txtMessageCentre.Text += "Please connect the controller." + "\r\n";
             }
 
         }
