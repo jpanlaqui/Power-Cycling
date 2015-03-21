@@ -13,7 +13,7 @@ namespace PowerCyclingFunctions
         /*=========================================================================
         | I2C Power Cycling Command Registers
         ========================================================================*/
-        public enum I2CCommands: byte
+        public enum I2CCommands : byte
         {
             PC_T1_COUNT_LSB_CMD     = 0x20,		//Power ON duration (LSB) before power OFF command
             PC_T1_COUNT_MSB_CMD    	= 0x21, 	//Power ON duration (MSB)before power OFF command
@@ -39,9 +39,9 @@ namespace PowerCyclingFunctions
             CALIBRATION_DONE        = 0xCC,	    //Save data received to EEPROM
             MSB_BYTE                = 0x00      //MSB byte for 16-bit i2c data transmit
         }
+
         private ushort[] ports = new ushort[16];
         private uint[] uniqueIds = new uint[16];
-        //private int numElem = 16;
         private int port;
 
         /*=========================================================================
@@ -124,100 +124,181 @@ namespace PowerCyclingFunctions
         /*=========================================================================
         | Auto detect Aardvark controller
          ========================================================================*/
-        public void InitI2CConnection()
+        public int OpenI2CConnection()
         {
-                int handle;
-                int numElem = 16;
-                const int bitrate = 100;
+            int count, i;
+            int port = 0;
+            int handle = 0;
+            int numElem = 16;
+            const int bitrate = 100;
 
-                int count = AardvarkApi.aa_find_devices_ext(numElem, ports, numElem, uniqueIds);
-                if (count != 0)
+            count = AardvarkApi.aa_find_devices_ext(numElem, ports, numElem, uniqueIds);
+            if (count != 0)
+            {
+                if (count > numElem) count = numElem;
+                // Print the information on each device
+                for (i = 0; i < count; ++i)
                 {
-                    //Get the handle number of the Aardvark I2C/SPI adapter
-                    handle = AardvarkApi.aa_open(port);
-
-                    //Set the pull-up of the I2C/SPI Aardvark adapter to none
-                    AardvarkApi.aa_i2c_pullup(handle, AardvarkApi.AA_I2C_PULLUP_NONE);
-
-                    //Set the configuration to I2C/SPI mode
-                    AardvarkApi.aa_configure(handle, AardvarkConfig.AA_CONFIG_SPI_I2C);
-
-                    //Configure the target power pins
-                    AardvarkApi.aa_target_power(handle, AardvarkApi.AA_TARGET_POWER_NONE);
-
-                    //Configure the bit rate
-                    AardvarkApi.aa_i2c_bitrate(handle, bitrate);
+                    // Determine if the device is in-use
+                    if ((ports[i] & AardvarkApi.AA_PORT_NOT_FREE) != 0)
+                    {
+                        //Device in-use
+                        ports[i] &= unchecked((ushort)~AardvarkApi.AA_PORT_NOT_FREE);
+                    }
+                    else
+                    {
+                        //Device port number available
+                        port = ports[i];
+                    }
                 }
-
-
-
-
-
+                //Configure the I2C controller
+                //Get the handle number of the Aardvark I2C/SPI adapter
+                handle = AardvarkApi.aa_open(port);
+                //Set the pull-up of the I2C/SPI Aardvark adapter to none
+                AardvarkApi.aa_i2c_pullup(handle, AardvarkApi.AA_I2C_PULLUP_NONE);
+                //Set the configuration to I2C/SPI mode
+                AardvarkApi.aa_configure(handle, AardvarkConfig.AA_CONFIG_SPI_I2C);
+                //Configure the target power pins
+                AardvarkApi.aa_target_power(handle, AardvarkApi.AA_TARGET_POWER_NONE);
+                //Configure the bit rate
+                AardvarkApi.aa_i2c_bitrate(handle, bitrate);
+            }
+            return handle;
         }
     }
 
     class ReadWriteData
     {
-        private const byte bytesReceived = 2;
-        //private int handle;
-        private ushort slaveAddress;
-        private byte[] command;
 
-        public ushort ReadData(int handle, byte slaveAddress, byte command)
+        public uint ReadData(byte command1, byte command2)
         {
-            ushort dataRead;
+            uint dataRead;
+            uint [] dataReadTemp = new uint[4];
+            int handle;
             const ushort numberOfBytes = 2;
-            ushort dataReadTemp;
             byte[] dataOut = new byte[2];
             byte[] dataIn = new byte[2];
-            dataOut[0] = command;
 
-            Aardvark OpenConnection = new Aardvark();
-            port = OpenConnection.Aadetect(txtMessageCentre);
-            OpenConnection.InitAardvark(port, txtMessageCentre);
+            //Create the I2C connection and open the connection
+            Aardvark I2CConnection = new Aardvark();
+            handle = I2CConnection.OpenI2CConnection();
 
-
-
+            /*-------------------------------------------------------------------------------------------------------*/
+            dataOut[0] = command1;
             //Write the I2C address and 1-byte of command
-            AardvarkApi.aa_i2c_write(handle, slaveAddress,
+            AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
                                      AardvarkI2cFlags.AA_I2C_NO_STOP,
                                      numberOfBytes, dataOut);
-
             //Write the I2C address and read 2-bytes of data
-            AardvarkApi.aa_i2c_read(handle, slaveAddress,
+            AardvarkApi.aa_i2c_read(handle, Aardvark.I2C_ADDRESS,
                                     AardvarkI2cFlags.AA_I2C_NO_FLAGS,
                                     numberOfBytes, dataIn);
-
-            dataReadTemp = (ushort)(dataIn[0] & 0x00FF);
-            dataReadTemp = (ushort)(dataIn[0] << 8);
-
-            dataRead = dataReadTemp;
- 
+            dataReadTemp[0] = (uint)(dataIn[0] & 0x000000FF);
+            dataReadTemp[1] = (uint)(dataIn[1] << 8 & 0x0000FF00);
+            dataOut[0] = command2;
+            //Write the I2C address and 1-byte of command
+            AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
+                                     AardvarkI2cFlags.AA_I2C_NO_STOP,
+                                     numberOfBytes, dataOut);
+            //Write the I2C address and read 2-bytes of data
+            AardvarkApi.aa_i2c_read(handle, Aardvark.I2C_ADDRESS,
+                                    AardvarkI2cFlags.AA_I2C_NO_FLAGS,
+                                    numberOfBytes, dataIn);
+            dataReadTemp[2] = (uint)(dataIn[0] << 16 & 0x00FF0000);
+            dataReadTemp[3] = (uint)(dataIn[1] << 24 & 0xFF000000);
+            /*-------------------------------------------------------------------------------------------------------*/
+            dataRead = (uint)(dataReadTemp[0] | dataReadTemp[1] |
+                                dataReadTemp[2] | dataReadTemp[3]);
+            AardvarkApi.aa_close(handle);
             return dataRead;
         }
 
-        public void WriteParameters(int handle, byte slaveAddress, byte command) 
+        public uint WriteData(uint data, byte command1, byte command2) 
         {
-           // int dataRead;
-           // const ushort numberOfBytes = 2;
-           // byte[] dataOut = null;
-           // short i, n;
+            uint dataRead;
+            uint[] dataReadTemp = new uint[4];
+            int handle;
+            const ushort bytesToWrite = 3;
+            const ushort bytesToRead = 2;
+            byte[] dataOut = new byte[3];
+            byte[] dataIn = new byte[2];
+            byte[] splitData = new byte[4];
 
-           // int count, i;
-           // byte[] dataOut = { addr };
-           // byte[] dataIn = new byte[length];
-
-
-           // dataOut[0] = command;
-           // AardvarkApi.aa_i2c_write(handle, slaveAddress,
-           //                          AardvarkI2cFlags.AA_I2C_NO_FLAGS,
-           //                          numberOfBytes, dataOut);
-           // AardvarkApi.aa_sleep_ms(10);
-
-            int x = 10;
+            splitData = BitConverter.GetBytes(data);
 
 
-           //return dataWrite;
+            //Create the I2C connection and open the connection
+            Aardvark I2CConnection = new Aardvark();
+            handle = I2CConnection.OpenI2CConnection();
+
+            /*-------------------------------------------------------------------------------------------------------*/
+            //Allow to write on EEPROM
+            dataOut[0] = (byte)Aardvark.I2CCommands.CALIBRATION_CMD;
+            dataOut[1] = (byte)Aardvark.I2CCommands.CALIBRATION_ACTIVE;
+            dataOut[2] = (byte)Aardvark.I2CCommands.MSB_BYTE;
+            //Write the I2C address, 1-byte command and 2-bytes of data
+            AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
+                                     AardvarkI2cFlags.AA_I2C_NO_FLAGS,
+                                     bytesToWrite, dataOut);
+            AardvarkApi.aa_sleep_ms (10);
+            /*-------------------------------------------------------------------------------------------------------*/
+            //Write power cycling parameter (least significant word)
+            dataOut[0] = command1; 
+            dataOut[1] = splitData[0];
+            dataOut[2] = splitData[1];
+            //Write the I2C address, 1-byte command and 2-bytes of data
+            AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
+                                     AardvarkI2cFlags.AA_I2C_NO_FLAGS,
+                                     bytesToWrite, dataOut);
+            AardvarkApi.aa_sleep_ms(10);
+            /*-------------------------------------------------------------------------------------------------------*/
+            //Write power cycling parameter (most significant word)
+            dataOut[0] = command2;
+            dataOut[1] = splitData[2];
+            dataOut[2] = splitData[3];
+            //Write the I2C address, 1-byte command and 2-bytes of data
+            AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
+                                     AardvarkI2cFlags.AA_I2C_NO_FLAGS,
+                                     bytesToWrite, dataOut);
+            AardvarkApi.aa_sleep_ms(10);
+            /*-------------------------------------------------------------------------------------------------------*/
+            //Write on EEPROM
+            dataOut[0] = (byte)Aardvark.I2CCommands.CALIBRATION_CMD;
+            dataOut[1] = (byte)Aardvark.I2CCommands.CALIBRATION_DONE;
+            dataOut[1] = (byte)Aardvark.I2CCommands.MSB_BYTE;
+            //Write the I2C address, 1-byte command and 2-bytes of data
+            AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
+                                     AardvarkI2cFlags.AA_I2C_NO_FLAGS,
+                                     bytesToWrite, dataOut);
+            AardvarkApi.aa_sleep_ms(10);
+            /*-------------------------------------------------------------------------------------------------------*/
+            dataOut[0] = command1;
+            //Write the I2C address and 1-byte of command
+            AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
+                                     AardvarkI2cFlags.AA_I2C_NO_STOP,
+                                     bytesToRead, dataOut);
+            //Write the I2C address and read 2-bytes of data
+            AardvarkApi.aa_i2c_read(handle, Aardvark.I2C_ADDRESS,
+                                    AardvarkI2cFlags.AA_I2C_NO_FLAGS,
+                                    bytesToRead, dataIn);
+            dataReadTemp[0] = (uint)(dataIn[0] & 0x000000FF);
+            dataReadTemp[1] = (uint)(dataIn[1] << 8 & 0x0000FF00);
+            dataOut[0] = command2;
+            //Write the I2C address and 1-byte of command
+            AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
+                                     AardvarkI2cFlags.AA_I2C_NO_STOP,
+                                     bytesToRead, dataOut);
+            //Write the I2C address and read 2-bytes of data
+            AardvarkApi.aa_i2c_read(handle, Aardvark.I2C_ADDRESS,
+                                    AardvarkI2cFlags.AA_I2C_NO_FLAGS,
+                                    bytesToRead, dataIn);
+            dataReadTemp[2] = (uint)(dataIn[0] << 16 & 0x00FF0000);
+            dataReadTemp[3] = (uint)(dataIn[1] << 24 & 0xFF000000);
+            /*-------------------------------------------------------------------------------------------------------*/
+            dataRead = (uint)(dataReadTemp[0] | dataReadTemp[1] |
+                                dataReadTemp[2] | dataReadTemp[3]);
+            AardvarkApi.aa_close(handle);
+            return dataRead;
         }
     }
 
