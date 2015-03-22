@@ -130,7 +130,7 @@ namespace PowerCyclingFunctions
             int port = 0;
             int handle = 0;
             int numElem = 16;
-            const int bitrate = 100;
+            //const int bitrate = 100;
 
             count = AardvarkApi.aa_find_devices_ext(numElem, ports, numElem, uniqueIds);
             if (count != 0)
@@ -154,14 +154,14 @@ namespace PowerCyclingFunctions
                 //Configure the I2C controller
                 //Get the handle number of the Aardvark I2C/SPI adapter
                 handle = AardvarkApi.aa_open(port);
-                //Set the pull-up of the I2C/SPI Aardvark adapter to none
-                AardvarkApi.aa_i2c_pullup(handle, AardvarkApi.AA_I2C_PULLUP_NONE);
-                //Set the configuration to I2C/SPI mode
-                AardvarkApi.aa_configure(handle, AardvarkConfig.AA_CONFIG_SPI_I2C);
-                //Configure the target power pins
-                AardvarkApi.aa_target_power(handle, AardvarkApi.AA_TARGET_POWER_NONE);
-                //Configure the bit rate
-                AardvarkApi.aa_i2c_bitrate(handle, bitrate);
+                ////Set the pull-up of the I2C/SPI Aardvark adapter to none
+                //AardvarkApi.aa_i2c_pullup(handle, AardvarkApi.AA_I2C_PULLUP_NONE);
+                ////Set the configuration to I2C/SPI mode
+                //AardvarkApi.aa_configure(handle, AardvarkConfig.AA_CONFIG_SPI_I2C);
+                ////Configure the target power pins
+                //AardvarkApi.aa_target_power(handle, AardvarkApi.AA_TARGET_POWER_NONE);
+                ////Configure the bit rate
+                //AardvarkApi.aa_i2c_bitrate(handle, bitrate);
             }
             return handle;
         }

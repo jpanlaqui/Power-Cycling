@@ -47,6 +47,10 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.lblFocus = new System.Windows.Forms.Label();
             this.frmTimer = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnMonitor
@@ -62,12 +66,12 @@
             // txtMessageCentre
             // 
             this.txtMessageCentre.AcceptsReturn = true;
-            this.txtMessageCentre.Location = new System.Drawing.Point(12, 204);
+            this.txtMessageCentre.Location = new System.Drawing.Point(12, 215);
             this.txtMessageCentre.Multiline = true;
             this.txtMessageCentre.Name = "txtMessageCentre";
             this.txtMessageCentre.ReadOnly = true;
             this.txtMessageCentre.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessageCentre.Size = new System.Drawing.Size(541, 46);
+            this.txtMessageCentre.Size = new System.Drawing.Size(541, 35);
             this.txtMessageCentre.TabIndex = 1;
             this.txtMessageCentre.TabStop = false;
             // 
@@ -148,7 +152,7 @@
             // 
             // txtT1Set
             // 
-            this.txtT1Set.Location = new System.Drawing.Point(51, 57);
+            this.txtT1Set.Location = new System.Drawing.Point(51, 60);
             this.txtT1Set.MaxLength = 10;
             this.txtT1Set.Name = "txtT1Set";
             this.txtT1Set.Size = new System.Drawing.Size(100, 20);
@@ -158,7 +162,7 @@
             // 
             // txtT2Set
             // 
-            this.txtT2Set.Location = new System.Drawing.Point(233, 57);
+            this.txtT2Set.Location = new System.Drawing.Point(233, 60);
             this.txtT2Set.MaxLength = 10;
             this.txtT2Set.Name = "txtT2Set";
             this.txtT2Set.Size = new System.Drawing.Size(100, 20);
@@ -168,7 +172,7 @@
             // 
             // txtT3Set
             // 
-            this.txtT3Set.Location = new System.Drawing.Point(415, 57);
+            this.txtT3Set.Location = new System.Drawing.Point(415, 60);
             this.txtT3Set.MaxLength = 10;
             this.txtT3Set.Name = "txtT3Set";
             this.txtT3Set.Size = new System.Drawing.Size(100, 20);
@@ -178,7 +182,7 @@
             // 
             // txtCycleCount
             // 
-            this.txtCycleCount.Location = new System.Drawing.Point(233, 175);
+            this.txtCycleCount.Location = new System.Drawing.Point(233, 172);
             this.txtCycleCount.Name = "txtCycleCount";
             this.txtCycleCount.ReadOnly = true;
             this.txtCycleCount.Size = new System.Drawing.Size(100, 20);
@@ -209,11 +213,55 @@
             this.frmTimer.Interval = 10;
             this.frmTimer.Tick += new System.EventHandler(this.frmTimer_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(80, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "T1 (ms)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(259, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "T2 (ms)";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(441, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "T3 (ms)";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(251, 193);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Cycle (ms)";
+            // 
             // frmPowerCycling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 261);
+            this.ClientSize = new System.Drawing.Size(566, 259);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCycleCount);
             this.Controls.Add(this.txtCycleSet);
             this.Controls.Add(this.txtT3Set);
@@ -264,6 +312,10 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblFocus;
         private System.Windows.Forms.Timer frmTimer;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
