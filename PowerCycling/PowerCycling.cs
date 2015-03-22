@@ -15,14 +15,18 @@ namespace PowerCycling
 {
     public partial class frmPowerCycling : Form
     {
+        private static int count1;
+        private static int count2;
+        
         public frmPowerCycling()
         {
             InitializeComponent();
-            //txtMessageCentre.Focus();
         }
 
         private void frmPowerCycling_Load(object sender, EventArgs e)
         {
+            //Use to enable or disable the power cycling monitoring
+            frmTimer.Enabled = false;
             //Will be executed when the form is loading
             //To set focus on a control use the select method (focus does not work here - not sure why!)
             lblFocus.Select();
@@ -31,43 +35,18 @@ namespace PowerCycling
 
         private void btnMonitor_Click(object sender, EventArgs e)
         {
-            txtMessageCentre.Text += "Reading power cycling parameters..." + "\r\n";
-            uint readData;
-            ReadWriteData I2CRead = new ReadWriteData();
-            /*-------------------------------------------------------------------------------------------------------*/
-            //Read the power cycling set parameters
-            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T1_SET_LSB_CMD,
-                                        (byte)Aardvark.I2CCommands.PC_T1_SET_MSB_CMD);
-            txtT1Set.Text = readData.ToString();
-            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T2_SET_LSB_CMD,
-                                        (byte)Aardvark.I2CCommands.PC_T2_SET_MSB_CMD);
-            txtT2Set.Text = readData.ToString();
-            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T3_SET_LSB_CMD,
-                                        (byte)Aardvark.I2CCommands.PC_T3_SET_MSB_CMD);
-            txtT3Set.Text = readData.ToString();
-            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_COUNT_SET_LSB_CMD,
-                                        (byte)Aardvark.I2CCommands.PC_COUNT_SET_MSB_CMD);
-            txtCycleSet.Text = readData.ToString();
-            /*-------------------------------------------------------------------------------------------------------*/
-            //Read the power cycling counts
-            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T1_COUNT_LSB_CMD,
-                                        (byte)Aardvark.I2CCommands.PC_T1_COUNT_MSB_CMD);
-            txtT1Count.Text = readData.ToString();
-            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T2_COUNT_LSB_CMD,
-                                        (byte)Aardvark.I2CCommands.PC_T2_COUNT_MSB_CMD);
-            txtT2Count.Text = readData.ToString();
-            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T3_COUNT_LSB_CMD,
-                                        (byte)Aardvark.I2CCommands.PC_T3_COUNT_MSB_CMD);
-            txtT3Count.Text = readData.ToString();
-            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_COUNT_LSB_CMD,
-                                        (byte)Aardvark.I2CCommands.PC_COUNT_MSB_CMD);
-            txtCycleCount.Text = readData.ToString();
-            /*-------------------------------------------------------------------------------------------------------*/
+            frmTimer.Enabled = !frmTimer.Enabled;
             lblFocus.Select();
-            txtMessageCentre.Text += "Reading power cycling parameters... done!" + "\r\n";
-            txtMessageCentre.SelectionStart = txtMessageCentre.Text.Length;
-            txtMessageCentre.ScrollToCaret();
-            txtMessageCentre.Refresh();
+
+            count2 = count1;
+
+            if (!frmTimer.Enabled)
+            {
+                txtMessageCentre.Text += "Reading power cycling parameters... done!" + "\r\n";
+                txtMessageCentre.SelectionStart = txtMessageCentre.Text.Length;
+                txtMessageCentre.ScrollToCaret();
+                txtMessageCentre.Refresh();
+            }
         }
 
         private void btnWrite_Click(object sender, EventArgs e)
@@ -94,6 +73,10 @@ namespace PowerCycling
                                           (byte)Aardvark.I2CCommands.PC_COUNT_SET_LSB_CMD,
                                           (byte)Aardvark.I2CCommands.PC_COUNT_SET_MSB_CMD);
             /*-------------------------------------------------------------------------------------------------------*/
+            prgT1.Value = 0;
+            prgT2.Value = 0;
+            prgT3.Value = 0;
+            prgCycle.Value = 0;
             lblFocus.Select();
             txtMessageCentre.Text += "Writing power cycling parameters... done!" + "\r\n";
             txtMessageCentre.SelectionStart = txtMessageCentre.Text.Length;
@@ -110,8 +93,6 @@ namespace PowerCycling
         {
             //See MSDN and look for the "Key Enumeration" and "8" is the backspace key
             //and "46" is the delete key. Allows only digit keys and backspace key
-            
-            //TextBox inputBox = new TextBox();
             char ch = e.KeyChar;
             if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
             {
@@ -120,9 +101,55 @@ namespace PowerCycling
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void frmTimer_Tick(object sender, EventArgs e)
         {
+            txtMessageCentre.Text += "Reading power cycling parameters..." + "\r\n";
 
+            uint readData;
+            ReadWriteData I2CRead = new ReadWriteData();
+            /*-------------------------------------------------------------------------------------------------------*/
+            if (count2 == count1)
+            {
+                //Read the power cycling set parameters
+                readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T1_SET_LSB_CMD,
+                                            (byte)Aardvark.I2CCommands.PC_T1_SET_MSB_CMD);
+                prgT1.Maximum = (int)readData;
+                txtT1Set.Text = readData.ToString();
+                readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T2_SET_LSB_CMD,
+                                            (byte)Aardvark.I2CCommands.PC_T2_SET_MSB_CMD);
+                prgT2.Maximum = (int)readData;
+                txtT2Set.Text = readData.ToString();
+                readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T3_SET_LSB_CMD,
+                                            (byte)Aardvark.I2CCommands.PC_T3_SET_MSB_CMD);
+                prgT3.Maximum = (int)readData;
+                txtT3Set.Text = readData.ToString();
+                readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_COUNT_SET_LSB_CMD,
+                                            (byte)Aardvark.I2CCommands.PC_COUNT_SET_MSB_CMD);
+                prgCycle.Maximum = (int)readData;
+                txtCycleSet.Text = readData.ToString();
+
+                count1++;
+            }
+
+            /*-------------------------------------------------------------------------------------------------------*/
+            //Read the power cycling counts
+            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T1_COUNT_LSB_CMD,
+                                        (byte)Aardvark.I2CCommands.PC_T1_COUNT_MSB_CMD);
+            prgT1.Value = (int)readData;
+            txtT1Count.Text = readData.ToString();
+            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T2_COUNT_LSB_CMD,
+                                        (byte)Aardvark.I2CCommands.PC_T2_COUNT_MSB_CMD);
+            prgT2.Value = (int)readData;
+            txtT2Count.Text = readData.ToString();
+            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T3_COUNT_LSB_CMD,
+                                        (byte)Aardvark.I2CCommands.PC_T3_COUNT_MSB_CMD);
+            prgT3.Value = (int)readData;
+            txtT3Count.Text = readData.ToString();
+            readData = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_COUNT_LSB_CMD,
+                                        (byte)Aardvark.I2CCommands.PC_COUNT_MSB_CMD);
+            prgCycle.Value = (int)readData;
+            txtCycleCount.Text = readData.ToString();
+            /*-------------------------------------------------------------------------------------------------------*/
         }
     }
 }

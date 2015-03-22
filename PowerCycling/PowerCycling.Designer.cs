@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnMonitor = new System.Windows.Forms.Button();
             this.txtMessageCentre = new System.Windows.Forms.TextBox();
             this.btnWrite = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.progressBar3 = new System.Windows.Forms.ProgressBar();
-            this.progressBar4 = new System.Windows.Forms.ProgressBar();
+            this.prgT1 = new System.Windows.Forms.ProgressBar();
+            this.prgT2 = new System.Windows.Forms.ProgressBar();
+            this.prgT3 = new System.Windows.Forms.ProgressBar();
+            this.prgCycle = new System.Windows.Forms.ProgressBar();
             this.txtT1Count = new System.Windows.Forms.TextBox();
             this.txtT2Count = new System.Windows.Forms.TextBox();
             this.txtT3Count = new System.Windows.Forms.TextBox();
@@ -45,11 +46,12 @@
             this.txtCycleCount = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblFocus = new System.Windows.Forms.Label();
+            this.frmTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnMonitor
             // 
-            this.btnMonitor.Location = new System.Drawing.Point(13, 12);
+            this.btnMonitor.Location = new System.Drawing.Point(13, 11);
             this.btnMonitor.Name = "btnMonitor";
             this.btnMonitor.Size = new System.Drawing.Size(75, 23);
             this.btnMonitor.TabIndex = 0;
@@ -60,7 +62,7 @@
             // txtMessageCentre
             // 
             this.txtMessageCentre.AcceptsReturn = true;
-            this.txtMessageCentre.Location = new System.Drawing.Point(12, 225);
+            this.txtMessageCentre.Location = new System.Drawing.Point(12, 204);
             this.txtMessageCentre.Multiline = true;
             this.txtMessageCentre.Name = "txtMessageCentre";
             this.txtMessageCentre.ReadOnly = true;
@@ -71,7 +73,7 @@
             // 
             // btnWrite
             // 
-            this.btnWrite.Location = new System.Drawing.Point(94, 12);
+            this.btnWrite.Location = new System.Drawing.Point(94, 11);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(75, 23);
             this.btnWrite.TabIndex = 1;
@@ -79,37 +81,37 @@
             this.btnWrite.UseVisualStyleBackColor = true;
             this.btnWrite.Click += new System.EventHandler(this.btnWrite_Click);
             // 
-            // progressBar1
+            // prgT1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(13, 130);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(176, 14);
-            this.progressBar1.TabIndex = 2;
+            this.prgT1.Location = new System.Drawing.Point(13, 109);
+            this.prgT1.Name = "prgT1";
+            this.prgT1.Size = new System.Drawing.Size(176, 14);
+            this.prgT1.TabIndex = 2;
             // 
-            // progressBar2
+            // prgT2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(195, 130);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(176, 14);
-            this.progressBar2.TabIndex = 2;
+            this.prgT2.Location = new System.Drawing.Point(195, 109);
+            this.prgT2.Name = "prgT2";
+            this.prgT2.Size = new System.Drawing.Size(176, 14);
+            this.prgT2.TabIndex = 2;
             // 
-            // progressBar3
+            // prgT3
             // 
-            this.progressBar3.Location = new System.Drawing.Point(377, 130);
-            this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(176, 14);
-            this.progressBar3.TabIndex = 2;
+            this.prgT3.Location = new System.Drawing.Point(377, 109);
+            this.prgT3.Name = "prgT3";
+            this.prgT3.Size = new System.Drawing.Size(176, 14);
+            this.prgT3.TabIndex = 2;
             // 
-            // progressBar4
+            // prgCycle
             // 
-            this.progressBar4.Location = new System.Drawing.Point(13, 150);
-            this.progressBar4.Name = "progressBar4";
-            this.progressBar4.Size = new System.Drawing.Size(540, 14);
-            this.progressBar4.TabIndex = 2;
+            this.prgCycle.Location = new System.Drawing.Point(13, 129);
+            this.prgCycle.Name = "prgCycle";
+            this.prgCycle.Size = new System.Drawing.Size(540, 14);
+            this.prgCycle.TabIndex = 2;
             // 
             // txtT1Count
             // 
-            this.txtT1Count.Location = new System.Drawing.Point(51, 104);
+            this.txtT1Count.Location = new System.Drawing.Point(51, 83);
             this.txtT1Count.Name = "txtT1Count";
             this.txtT1Count.ReadOnly = true;
             this.txtT1Count.Size = new System.Drawing.Size(100, 20);
@@ -118,7 +120,7 @@
             // 
             // txtT2Count
             // 
-            this.txtT2Count.Location = new System.Drawing.Point(233, 104);
+            this.txtT2Count.Location = new System.Drawing.Point(233, 83);
             this.txtT2Count.Name = "txtT2Count";
             this.txtT2Count.ReadOnly = true;
             this.txtT2Count.Size = new System.Drawing.Size(100, 20);
@@ -127,7 +129,7 @@
             // 
             // txtT3Count
             // 
-            this.txtT3Count.Location = new System.Drawing.Point(415, 104);
+            this.txtT3Count.Location = new System.Drawing.Point(415, 83);
             this.txtT3Count.Name = "txtT3Count";
             this.txtT3Count.ReadOnly = true;
             this.txtT3Count.Size = new System.Drawing.Size(100, 20);
@@ -136,7 +138,7 @@
             // 
             // txtCycleSet
             // 
-            this.txtCycleSet.Location = new System.Drawing.Point(233, 170);
+            this.txtCycleSet.Location = new System.Drawing.Point(233, 149);
             this.txtCycleSet.MaxLength = 10;
             this.txtCycleSet.Name = "txtCycleSet";
             this.txtCycleSet.Size = new System.Drawing.Size(100, 20);
@@ -146,7 +148,7 @@
             // 
             // txtT1Set
             // 
-            this.txtT1Set.Location = new System.Drawing.Point(51, 78);
+            this.txtT1Set.Location = new System.Drawing.Point(51, 57);
             this.txtT1Set.MaxLength = 10;
             this.txtT1Set.Name = "txtT1Set";
             this.txtT1Set.Size = new System.Drawing.Size(100, 20);
@@ -156,7 +158,7 @@
             // 
             // txtT2Set
             // 
-            this.txtT2Set.Location = new System.Drawing.Point(233, 78);
+            this.txtT2Set.Location = new System.Drawing.Point(233, 57);
             this.txtT2Set.MaxLength = 10;
             this.txtT2Set.Name = "txtT2Set";
             this.txtT2Set.Size = new System.Drawing.Size(100, 20);
@@ -166,7 +168,7 @@
             // 
             // txtT3Set
             // 
-            this.txtT3Set.Location = new System.Drawing.Point(415, 78);
+            this.txtT3Set.Location = new System.Drawing.Point(415, 57);
             this.txtT3Set.MaxLength = 10;
             this.txtT3Set.Name = "txtT3Set";
             this.txtT3Set.Size = new System.Drawing.Size(100, 20);
@@ -176,7 +178,7 @@
             // 
             // txtCycleCount
             // 
-            this.txtCycleCount.Location = new System.Drawing.Point(233, 196);
+            this.txtCycleCount.Location = new System.Drawing.Point(233, 175);
             this.txtCycleCount.Name = "txtCycleCount";
             this.txtCycleCount.ReadOnly = true;
             this.txtCycleCount.Size = new System.Drawing.Size(100, 20);
@@ -185,7 +187,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(175, 12);
+            this.btnExit.Location = new System.Drawing.Point(175, 11);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 2;
@@ -196,18 +198,22 @@
             // lblFocus
             // 
             this.lblFocus.AutoSize = true;
-            this.lblFocus.Location = new System.Drawing.Point(446, 238);
+            this.lblFocus.Location = new System.Drawing.Point(446, 217);
             this.lblFocus.Name = "lblFocus";
             this.lblFocus.Size = new System.Drawing.Size(69, 13);
             this.lblFocus.TabIndex = 7;
             this.lblFocus.Text = "SettingFocus";
-            this.lblFocus.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // frmTimer
+            // 
+            this.frmTimer.Interval = 10;
+            this.frmTimer.Tick += new System.EventHandler(this.frmTimer_Tick);
             // 
             // frmPowerCycling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 283);
+            this.ClientSize = new System.Drawing.Size(566, 261);
             this.Controls.Add(this.txtCycleCount);
             this.Controls.Add(this.txtCycleSet);
             this.Controls.Add(this.txtT3Set);
@@ -216,10 +222,10 @@
             this.Controls.Add(this.txtT2Count);
             this.Controls.Add(this.txtT1Set);
             this.Controls.Add(this.txtT1Count);
-            this.Controls.Add(this.progressBar3);
-            this.Controls.Add(this.progressBar2);
-            this.Controls.Add(this.progressBar4);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.prgT3);
+            this.Controls.Add(this.prgT2);
+            this.Controls.Add(this.prgCycle);
+            this.Controls.Add(this.prgT1);
             this.Controls.Add(this.txtMessageCentre);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnWrite);
@@ -243,10 +249,10 @@
         private System.Windows.Forms.Button btnMonitor;
         private System.Windows.Forms.TextBox txtMessageCentre;
         private System.Windows.Forms.Button btnWrite;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.ProgressBar progressBar3;
-        private System.Windows.Forms.ProgressBar progressBar4;
+        private System.Windows.Forms.ProgressBar prgT1;
+        private System.Windows.Forms.ProgressBar prgT2;
+        private System.Windows.Forms.ProgressBar prgT3;
+        private System.Windows.Forms.ProgressBar prgCycle;
         private System.Windows.Forms.TextBox txtT1Count;
         private System.Windows.Forms.TextBox txtT2Count;
         private System.Windows.Forms.TextBox txtT3Count;
@@ -257,6 +263,7 @@
         private System.Windows.Forms.TextBox txtCycleCount;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblFocus;
+        private System.Windows.Forms.Timer frmTimer;
     }
 }
 
