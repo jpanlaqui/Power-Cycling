@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnMonitor = new System.Windows.Forms.Button();
             this.txtMessageCentre = new System.Windows.Forms.TextBox();
             this.btnWrite = new System.Windows.Forms.Button();
@@ -46,11 +45,11 @@
             this.txtCycleCount = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblFocus = new System.Windows.Forms.Label();
-            this.frmTimer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // btnMonitor
@@ -88,6 +87,7 @@
             // prgT1
             // 
             this.prgT1.Location = new System.Drawing.Point(13, 109);
+            this.prgT1.Maximum = 10000;
             this.prgT1.Name = "prgT1";
             this.prgT1.Size = new System.Drawing.Size(176, 14);
             this.prgT1.TabIndex = 2;
@@ -148,7 +148,7 @@
             this.txtCycleSet.Size = new System.Drawing.Size(100, 20);
             this.txtCycleSet.TabIndex = 6;
             this.txtCycleSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtCycleSet.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtT1Set_KeyPress);
+            this.txtCycleSet.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSet_KeyPress);
             // 
             // txtT1Set
             // 
@@ -158,7 +158,7 @@
             this.txtT1Set.Size = new System.Drawing.Size(100, 20);
             this.txtT1Set.TabIndex = 3;
             this.txtT1Set.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtT1Set.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtT1Set_KeyPress);
+            this.txtT1Set.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSet_KeyPress);
             // 
             // txtT2Set
             // 
@@ -168,7 +168,7 @@
             this.txtT2Set.Size = new System.Drawing.Size(100, 20);
             this.txtT2Set.TabIndex = 4;
             this.txtT2Set.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtT2Set.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtT1Set_KeyPress);
+            this.txtT2Set.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSet_KeyPress);
             // 
             // txtT3Set
             // 
@@ -178,7 +178,7 @@
             this.txtT3Set.Size = new System.Drawing.Size(100, 20);
             this.txtT3Set.TabIndex = 5;
             this.txtT3Set.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtT3Set.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtT1Set_KeyPress);
+            this.txtT3Set.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSet_KeyPress);
             // 
             // txtCycleCount
             // 
@@ -207,11 +207,6 @@
             this.lblFocus.Size = new System.Drawing.Size(69, 13);
             this.lblFocus.TabIndex = 7;
             this.lblFocus.Text = "SettingFocus";
-            // 
-            // frmTimer
-            // 
-            this.frmTimer.Interval = 10;
-            this.frmTimer.Tick += new System.EventHandler(this.frmTimer_Tick);
             // 
             // label1
             // 
@@ -253,11 +248,19 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Cycle (ms)";
             // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            // 
             // frmPowerCycling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 259);
+            this.ClientSize = new System.Drawing.Size(565, 259);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -279,6 +282,8 @@
             this.Controls.Add(this.btnWrite);
             this.Controls.Add(this.btnMonitor);
             this.Controls.Add(this.lblFocus);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmPowerCycling";
             this.Text = "Power Cycling Control";
             this.Load += new System.EventHandler(this.frmPowerCycling_Load);
@@ -311,11 +316,11 @@
         private System.Windows.Forms.TextBox txtCycleCount;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblFocus;
-        private System.Windows.Forms.Timer frmTimer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
 

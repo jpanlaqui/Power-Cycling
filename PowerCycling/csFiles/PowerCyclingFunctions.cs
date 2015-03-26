@@ -15,25 +15,25 @@ namespace PowerCyclingFunctions
         ========================================================================*/
         public enum I2CCommands : byte
         {
-            PC_T1_COUNT_LSB_CMD     = 0x20,		//Power ON duration (LSB) before power OFF command
-            PC_T1_COUNT_MSB_CMD    	= 0x21, 	//Power ON duration (MSB)before power OFF command
-            PC_T2_COUNT_LSB_CMD    	= 0x22, 	//Power OFF duration (LSB) command
-            PC_T2_COUNT_MSB_CMD    	= 0x23, 	//Power OFF duration (MSB)command
-            PC_T3_COUNT_LSB_CMD    	= 0x24, 	//Power ON duration (LSB) after power OFF command
-            PC_T3_COUNT_MSB_CMD    	= 0x25, 	//Power ON duration (MSB) after power OFF command
-            PC_COUNT_LSB_CMD        = 0x26,		//Number of power cycling command (LSB)
-            PC_COUNT_MSB_CMD        = 0x27, 	//Number of power cycling command (MSB)
+            PC_T1COUNT_LSBCMD       = 0x20,		//Power ON duration (LSB) before power OFF command
+            PC_T1COUNT_MSBCMD    	= 0x21, 	//Power ON duration (MSB)before power OFF command
+            PC_T2COUNT_LSBCMD    	= 0x22, 	//Power OFF duration (LSB) command
+            PC_T2COUNT_MSBCMD    	= 0x23, 	//Power OFF duration (MSB)command
+            PC_T3COUNT_LSBCMD    	= 0x24, 	//Power ON duration (LSB) after power OFF command
+            PC_T3COUNT_MSBCMD    	= 0x25, 	//Power ON duration (MSB) after power OFF command
+            PC_CYCLECOUNT_LSBCMD    = 0x26,		//Number of power cycling command (LSB)
+            PC_CYCLECOUNT_MSBCMD    = 0x27, 	//Number of power cycling command (MSB)
             PC_STATUS_CMD           = 0x28, 	//Power cycling status register
-            PC_T1_SET_LSB_CMD       = 0x29, 	//Power ON duration set (LSB) before power OFF command
-            PC_T1_SET_MSB_CMD       = 0x2A, 	//Power ON duration set (MSB)before power OFF command
-            PC_T2_SET_LSB_CMD       = 0x2B, 	//Power OFF duration set (LSB) command
-            PC_T2_SET_MSB_CMD       = 0x2C, 	//Power OFF duration set (MSB)command
-            PC_T3_SET_LSB_CMD       = 0x2D, 	//Power ON duration set (LSB) after power OFF command
-            PC_T3_SET_MSB_CMD       = 0x2E, 	//Power ON duration set (MSB) after power OFF command
-            PC_COUNT_SET_LSB_CMD    = 0x2F, 	//Number of power set cycling command (LSB)
-            PC_COUNT_SET_MSB_CMD    = 0x30, 	//Number of power set cycling command (MSB)
+            PC_T1SET_LSBCMD         = 0x29, 	//Power ON duration set (LSB) before power OFF command
+            PC_T1SET_MSBCMD         = 0x2A, 	//Power ON duration set (MSB)before power OFF command
+            PC_T2SET_LSBCMD         = 0x2B, 	//Power OFF duration set (LSB) command
+            PC_T2SET_MSBCMD         = 0x2C, 	//Power OFF duration set (MSB)command
+            PC_T3SET_LSBCMD         = 0x2D, 	//Power ON duration set (LSB) after power OFF command
+            PC_T3SET_MSBCMD         = 0x2E, 	//Power ON duration set (MSB) after power OFF command
+            PC_CYCLESET_LSBCMD      = 0x2F, 	//Number of power set cycling command (LSB)
+            PC_CYCLESET_MSBCMD      = 0x30, 	//Number of power set cycling command (MSB)
             PC_RESET_CMD            = 0x31, 	//Reset/set counts and enable/disable MOSFET
-            PC_INCDEC_MODE_CMD      = 0x32, 	//Enable/disable inc/dec drop-out test
+            PC_INCDEC_MODECMD       = 0x32, 	//Enable/disable inc/dec drop-out test
             CALIBRATION_CMD         = 0x70,		//Allow EEPROM write
             CALIBRATION_ACTIVE      = 0xAA,	    //Allow EEPROM write
             CALIBRATION_DONE        = 0xCC,	    //Save data received to EEPROM
