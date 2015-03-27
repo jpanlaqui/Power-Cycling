@@ -240,7 +240,7 @@ namespace PowerCyclingFunctions
             AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
                                      AardvarkI2cFlags.AA_I2C_NO_FLAGS,
                                      bytesToWrite, dataOut);
-            AardvarkApi.aa_sleep_ms (10);
+            AardvarkApi.aa_sleep_ms (2);
             /*-------------------------------------------------------------------------------------------------------*/
             //Write power cycling parameter (least significant word)
             dataOut[0] = command1; 
@@ -250,7 +250,7 @@ namespace PowerCyclingFunctions
             AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
                                      AardvarkI2cFlags.AA_I2C_NO_FLAGS,
                                      bytesToWrite, dataOut);
-            AardvarkApi.aa_sleep_ms(10);
+            AardvarkApi.aa_sleep_ms(2);
             /*-------------------------------------------------------------------------------------------------------*/
             //Write power cycling parameter (most significant word)
             dataOut[0] = command2;
@@ -260,17 +260,18 @@ namespace PowerCyclingFunctions
             AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
                                      AardvarkI2cFlags.AA_I2C_NO_FLAGS,
                                      bytesToWrite, dataOut);
-            AardvarkApi.aa_sleep_ms(10);
+            AardvarkApi.aa_sleep_ms(2);
             /*-------------------------------------------------------------------------------------------------------*/
             //Write on EEPROM
             dataOut[0] = (byte)Aardvark.I2CCommands.CALIBRATION_CMD;
             dataOut[1] = (byte)Aardvark.I2CCommands.CALIBRATION_DONE;
-            dataOut[1] = (byte)Aardvark.I2CCommands.MSB_BYTE;
+            dataOut[2] = (byte)Aardvark.I2CCommands.MSB_BYTE;
             //Write the I2C address, 1-byte command and 2-bytes of data
             AardvarkApi.aa_i2c_write(handle, Aardvark.I2C_ADDRESS,
                                      AardvarkI2cFlags.AA_I2C_NO_FLAGS,
                                      bytesToWrite, dataOut);
-            AardvarkApi.aa_sleep_ms(10);
+            //20 ms sleep is needed to complete writing the power cycling parameters
+            AardvarkApi.aa_sleep_ms(20);
             /*-------------------------------------------------------------------------------------------------------*/
             dataOut[0] = command1;
             //Write the I2C address and 1-byte of command
