@@ -82,13 +82,8 @@ namespace PowerCycling
 
                 //Send message to message centre textbox
                 txtMessageCentre.Text = "Monitoring power cycling parameters...";
-                txtMessageCentre.SelectionStart = txtMessageCentre.Text.Length;
-                txtMessageCentre.ScrollToCaret();
-                txtMessageCentre.Refresh();
-
                 //Change "Monitor" button text
                 btnMonitor.Text = "Stop Monitor";
-
                 //This method will start the execution asynchronously in the background
                 backgroundWorker.RunWorkerAsync();
             }
@@ -105,35 +100,44 @@ namespace PowerCycling
         ==============================================================================================================*/
         private void btnWrite_Click(object sender, EventArgs e)
         {
-            txtMessageCentre.Text =  "Writing power cycling parameters...";
-            /*-------------------------------------------------------------------------------------------------------*/
-            //Read the power cycling set parameters
-            //writeData = Convert.ToUInt32(txtT1Set.Text);
-            txtT1Count.Text = (I2CReadWrite.WriteData(Convert.ToUInt32(txtT1Set.Text),
-                                          (byte)Aardvark.I2CCommands.PC_T1SET_LSBCMD,
-                                          (byte)Aardvark.I2CCommands.PC_T1SET_MSBCMD)).ToString();
-            //writeData = Convert.ToUInt32(txtT2Set.Text);
-            txtT2Count.Text = (I2CReadWrite.WriteData(Convert.ToUInt32(txtT2Set.Text),
-                                          (byte)Aardvark.I2CCommands.PC_T2SET_LSBCMD,
-                                          (byte)Aardvark.I2CCommands.PC_T2SET_MSBCMD)).ToString();
-            //writeData = Convert.ToUInt32(txtT3Set.Text);
-            txtT3Count.Text = (I2CReadWrite.WriteData(Convert.ToUInt32(txtT3Set.Text),
-                                          (byte)Aardvark.I2CCommands.PC_T3SET_LSBCMD,
-                                          (byte)Aardvark.I2CCommands.PC_T3SET_MSBCMD)).ToString();
-            //writeData = Convert.ToUInt32(txtCycleSet.Text);
-            txtCycleCount.Text = (I2CReadWrite.WriteData(Convert.ToUInt32(txtCycleSet.Text),
-                                          (byte)Aardvark.I2CCommands.PC_CYCLESET_LSBCMD,
-                                          (byte)Aardvark.I2CCommands.PC_CYCLESET_MSBCMD)).ToString();
-            /*-------------------------------------------------------------------------------------------------------*/
-            prgT1.Value = 0;
-            prgT2.Value = 0;
-            prgT3.Value = 0;
-            prgCycle.Value = 0;
-            lblFocus.Select();
-            txtMessageCentre.Text =  "Writing power cycling parameters... done!";
-            txtMessageCentre.SelectionStart = txtMessageCentre.Text.Length;
-            txtMessageCentre.ScrollToCaret();
-            txtMessageCentre.Refresh();
+            txtMessageCentre.Text = "Checking power cycling parameters if valid...";
+            if ((!string.IsNullOrWhiteSpace(txtT1Set.Text))  &&
+                (!string.IsNullOrWhiteSpace(txtT2Set.Text))  &&
+                (!string.IsNullOrWhiteSpace(txtT3Set.Text))  &&
+                (!string.IsNullOrWhiteSpace(txtCycleSet.Text)))
+            {
+                txtMessageCentre.Text = "Writing power cycling parameters...";
+                /*-------------------------------------------------------------------------------------------------------*/
+                //Read the power cycling set parameters
+                //writeData = Convert.ToUInt32(txtT1Set.Text);
+                txtT1Count.Text = (I2CReadWrite.WriteData(Convert.ToUInt32(txtT1Set.Text),
+                                              (byte)Aardvark.I2CCommands.PC_T1SET_LSBCMD,
+                                              (byte)Aardvark.I2CCommands.PC_T1SET_MSBCMD)).ToString();
+                //writeData = Convert.ToUInt32(txtT2Set.Text);
+                txtT2Count.Text = (I2CReadWrite.WriteData(Convert.ToUInt32(txtT2Set.Text),
+                                              (byte)Aardvark.I2CCommands.PC_T2SET_LSBCMD,
+                                              (byte)Aardvark.I2CCommands.PC_T2SET_MSBCMD)).ToString();
+                //writeData = Convert.ToUInt32(txtT3Set.Text);
+                txtT3Count.Text = (I2CReadWrite.WriteData(Convert.ToUInt32(txtT3Set.Text),
+                                              (byte)Aardvark.I2CCommands.PC_T3SET_LSBCMD,
+                                              (byte)Aardvark.I2CCommands.PC_T3SET_MSBCMD)).ToString();
+                //writeData = Convert.ToUInt32(txtCycleSet.Text);
+                txtCycleCount.Text = (I2CReadWrite.WriteData(Convert.ToUInt32(txtCycleSet.Text),
+                                              (byte)Aardvark.I2CCommands.PC_CYCLESET_LSBCMD,
+                                              (byte)Aardvark.I2CCommands.PC_CYCLESET_MSBCMD)).ToString();
+                /*-------------------------------------------------------------------------------------------------------*/
+                prgT1.Value = 0;
+                prgT2.Value = 0;
+                prgT3.Value = 0;
+                prgCycle.Value = 0;
+                lblFocus.Select();
+                txtMessageCentre.Text = "Writing power cycling parameters... done!";
+            }
+            else
+            {
+                txtMessageCentre.Text = "Textbox(es) has invalid data or its empty...";
+            }
+
         }
         /*==============================================================================================================
         | Description: Reads power cycling parameters and send to background worker progress change
@@ -234,7 +238,7 @@ namespace PowerCycling
         {
             if (e.Cancelled)
             {
-                txtMessageCentre.Text = "Processing cancelled";
+                txtMessageCentre.Text = "Monitoring power cycling... cancelled!";
             }
             else if (e.Error != null)
             {
