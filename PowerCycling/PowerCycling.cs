@@ -23,7 +23,7 @@ namespace PowerCycling
         private uint uintT2Count;
         private uint uintT3Count;
         private uint uintCycleCount;
-        private ReadWriteData I2CReadWrite = new ReadWriteData();
+        private PowerCyclingCom I2CReadWrite = new PowerCyclingCom();
 
         /*==============================================================================================================
         | Description: 
@@ -70,6 +70,7 @@ namespace PowerCycling
                 prgCycle.Maximum = (int)uintCycleSet;
                 txtCycleSet.Text = uintCycleSet.ToString();
 
+                //Reset all textboxes and progress bars
                 prgT1.Value = 0;
                 txtT1Count.Text = "0";
                 prgT2.Value = 0;
@@ -78,18 +79,24 @@ namespace PowerCycling
                 txtT3Count.Text = "0";
                 prgCycle.Value = 0;
                 txtCycleCount.Text = "0";
-                
-                txtMessageCentre.Text += "Reading power cycling parameters..." + "\r\n";
+
+                //Send message to message centre textbox
+                txtMessageCentre.Text = "Monitoring power cycling parameters...";
                 txtMessageCentre.SelectionStart = txtMessageCentre.Text.Length;
                 txtMessageCentre.ScrollToCaret();
                 txtMessageCentre.Refresh();
 
-                // This method will start the execution asynchronously in the background
+                //Change "Monitor" button text
+                btnMonitor.Text = "Stop Monitor";
+
+                //This method will start the execution asynchronously in the background
                 backgroundWorker.RunWorkerAsync();
             }
             else
             {
-                // Cancel the asynchronous operation if still in progress
+                //Change "Monitor" button text
+                btnMonitor.Text = "Monitor";
+                //Cancel the asynchronous operation if still in progress
                 backgroundWorker.CancelAsync();
             }
         }
@@ -98,7 +105,7 @@ namespace PowerCycling
         ==============================================================================================================*/
         private void btnWrite_Click(object sender, EventArgs e)
         {
-            txtMessageCentre.Text += "Writing power cycling parameters..." + "\r\n";
+            txtMessageCentre.Text =  "Writing power cycling parameters...";
             /*-------------------------------------------------------------------------------------------------------*/
             //Read the power cycling set parameters
             //writeData = Convert.ToUInt32(txtT1Set.Text);
@@ -123,7 +130,7 @@ namespace PowerCycling
             prgT3.Value = 0;
             prgCycle.Value = 0;
             lblFocus.Select();
-            txtMessageCentre.Text += "Writing power cycling parameters... done!" + "\r\n";
+            txtMessageCentre.Text =  "Writing power cycling parameters... done!";
             txtMessageCentre.SelectionStart = txtMessageCentre.Text.Length;
             txtMessageCentre.ScrollToCaret();
             txtMessageCentre.Refresh();
@@ -133,9 +140,14 @@ namespace PowerCycling
         ==============================================================================================================*/
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            ReadWriteData I2CRead = new ReadWriteData();
+            //ReadWriteData I2CRead = new ReadWriteData();
             int i = 1;
             uint uintCycleCountPrevious = 0;
+
+            uintT1Count = 0;
+            uintT2Count = 0;
+            uintT3Count = 0;
+            uintCycleCount = 0;
 
             while (i == 1)
             {
@@ -149,20 +161,19 @@ namespace PowerCycling
                 {
                     if (uintT1Count != uintT1Set)
                     {
-                        uintT1Count = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T1COUNT_LSBCMD,
+                        uintT1Count = I2CReadWrite.ReadData((byte)Aardvark.I2CCommands.PC_T1COUNT_LSBCMD,
                                   (byte)Aardvark.I2CCommands.PC_T1COUNT_MSBCMD);
-                        uintT3Count = 0;
                     }
                     else if (uintT2Count != uintT2Set)
                     {
-                        uintT2Count = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T2COUNT_LSBCMD,
+                        uintT2Count = I2CReadWrite.ReadData((byte)Aardvark.I2CCommands.PC_T2COUNT_LSBCMD,
                                   (byte)Aardvark.I2CCommands.PC_T2COUNT_MSBCMD);
                     }
                     else
                     {
-                        uintT3Count = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_T3COUNT_LSBCMD,
+                        uintT3Count = I2CReadWrite.ReadData((byte)Aardvark.I2CCommands.PC_T3COUNT_LSBCMD,
                                   (byte)Aardvark.I2CCommands.PC_T3COUNT_MSBCMD);
-                        uintCycleCount = I2CRead.ReadData((byte)Aardvark.I2CCommands.PC_CYCLECOUNT_LSBCMD,
+                        uintCycleCount = I2CReadWrite.ReadData((byte)Aardvark.I2CCommands.PC_CYCLECOUNT_LSBCMD,
                                   (byte)Aardvark.I2CCommands.PC_CYCLECOUNT_MSBCMD);
                         
                         if (uintCycleCount == uintCycleSet)
@@ -174,38 +185,46 @@ namespace PowerCycling
                         else if (uintCycleCount > uintCycleCountPrevious)
                         {
                             uintCycleCountPrevious = uintCycleCount;
-                            /*Added to set the T3 progress bar complete*/
+                            /*Added to set the T3 progress bar complete because I2C is not fast enough to read data*/
                             uintT3Count = uintT3Set;
+
+                            backgroundWorker.ReportProgress(i, new FourUintData(uintT1Count, uintT2Count,
+                                                            uintT3Count, uintCycleCount));
+
+                            /*Delay for the T3 progress bar to show complete*/
+                            Thread.Sleep(500);
+
                             /*Reset T1 and T2 count to start updating their progress bar*/
                             uintT1Count = 0;
                             uintT2Count = 0;
+                            uintT3Count = 0;
                         }
                     }
 
                     /*Update the backgroundworker progress change*/
                     backgroundWorker.ReportProgress(i, new FourUintData(uintT1Count, uintT2Count,
                                                     uintT3Count, uintCycleCount));
-                    Thread.Sleep(5);
+                    Thread.Sleep(1);
                 }
             }
-            e.Result = "Monitoring power cycling... done!" + "\r\n";
+            e.Result = "Monitoring power cycling... done!";
         }
         /*==============================================================================================================
         | Description: Received backgroundWorker power cycling parameters and update UI
         ==============================================================================================================*/
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            FourUintData i2c = (FourUintData)e.UserState;
-            if (i2c != null)
+            FourUintData data = (FourUintData)e.UserState;
+            if (data != null)
             {
-                prgT1.Value = (int)i2c.Item1;
-                txtT1Count.Text = i2c.Item1.ToString();
-                prgT2.Value = (int)i2c.Item2;
-                txtT2Count.Text = i2c.Item2.ToString();
-                prgT3.Value = (int)i2c.Item3;
-                txtT3Count.Text = i2c.Item3.ToString();
-                prgCycle.Value = (int)i2c.Item4;
-                txtCycleCount.Text = i2c.Item4.ToString();
+                prgT1.Value = (int)data.Item1;
+                txtT1Count.Text = data.Item1.ToString();
+                prgT2.Value = (int)data.Item2;
+                txtT2Count.Text = data.Item2.ToString();
+                prgT3.Value = (int)data.Item3;
+                txtT3Count.Text = data.Item3.ToString();
+                prgCycle.Value = (int)data.Item4;
+                txtCycleCount.Text = data.Item4.ToString();
             }
         }
         /*==============================================================================================================
@@ -215,15 +234,18 @@ namespace PowerCycling
         {
             if (e.Cancelled)
             {
-                txtMessageCentre.Text = "Processing cancelled" + "\r\n;
+                txtMessageCentre.Text = "Processing cancelled";
             }
             else if (e.Error != null)
             {
-                txtMessageCentre.Text = e.Error.Message + "\r\n";
+                txtMessageCentre.Text = e.Error.Message;
             }
             else
             {
+                //Send message to message centre textbox
                 txtMessageCentre.Text = e.Result.ToString();
+                //Change "Monitor" button text
+                btnMonitor.Text = "Monitor";
             }
         }
         /*==============================================================================================================

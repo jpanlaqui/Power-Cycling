@@ -50,6 +50,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.lblMessageCentre = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnMonitor
@@ -65,12 +66,10 @@
             // txtMessageCentre
             // 
             this.txtMessageCentre.AcceptsReturn = true;
-            this.txtMessageCentre.Location = new System.Drawing.Point(12, 215);
-            this.txtMessageCentre.Multiline = true;
+            this.txtMessageCentre.Location = new System.Drawing.Point(12, 231);
             this.txtMessageCentre.Name = "txtMessageCentre";
             this.txtMessageCentre.ReadOnly = true;
-            this.txtMessageCentre.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessageCentre.Size = new System.Drawing.Size(541, 35);
+            this.txtMessageCentre.Size = new System.Drawing.Size(541, 20);
             this.txtMessageCentre.TabIndex = 1;
             this.txtMessageCentre.TabStop = false;
             // 
@@ -202,7 +201,7 @@
             // lblFocus
             // 
             this.lblFocus.AutoSize = true;
-            this.lblFocus.Location = new System.Drawing.Point(446, 217);
+            this.lblFocus.Location = new System.Drawing.Point(446, 229);
             this.lblFocus.Name = "lblFocus";
             this.lblFocus.Size = new System.Drawing.Size(69, 13);
             this.lblFocus.TabIndex = 7;
@@ -256,11 +255,23 @@
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
+            // lblMessageCentre
+            // 
+            this.lblMessageCentre.AutoSize = true;
+            this.lblMessageCentre.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessageCentre.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblMessageCentre.Location = new System.Drawing.Point(12, 216);
+            this.lblMessageCentre.Name = "lblMessageCentre";
+            this.lblMessageCentre.Size = new System.Drawing.Size(98, 13);
+            this.lblMessageCentre.TabIndex = 8;
+            this.lblMessageCentre.Text = "Message Centre";
+            // 
             // frmPowerCycling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 259);
+            this.ClientSize = new System.Drawing.Size(565, 261);
+            this.Controls.Add(this.lblMessageCentre);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -321,6 +332,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.Windows.Forms.Label lblMessageCentre;
     }
 }
 
