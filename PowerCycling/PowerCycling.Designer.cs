@@ -50,12 +50,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.lblMessageCentre = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnMonitor
             // 
-            this.btnMonitor.Location = new System.Drawing.Point(13, 11);
+            this.btnMonitor.Location = new System.Drawing.Point(318, 12);
             this.btnMonitor.Name = "btnMonitor";
             this.btnMonitor.Size = new System.Drawing.Size(75, 23);
             this.btnMonitor.TabIndex = 0;
@@ -66,7 +67,7 @@
             // txtMessageCentre
             // 
             this.txtMessageCentre.AcceptsReturn = true;
-            this.txtMessageCentre.Location = new System.Drawing.Point(12, 231);
+            this.txtMessageCentre.Location = new System.Drawing.Point(12, 263);
             this.txtMessageCentre.Name = "txtMessageCentre";
             this.txtMessageCentre.ReadOnly = true;
             this.txtMessageCentre.Size = new System.Drawing.Size(541, 20);
@@ -75,7 +76,7 @@
             // 
             // btnWrite
             // 
-            this.btnWrite.Location = new System.Drawing.Point(94, 11);
+            this.btnWrite.Location = new System.Drawing.Point(399, 12);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(75, 23);
             this.btnWrite.TabIndex = 1;
@@ -85,7 +86,7 @@
             // 
             // prgT1
             // 
-            this.prgT1.Location = new System.Drawing.Point(13, 109);
+            this.prgT1.Location = new System.Drawing.Point(13, 143);
             this.prgT1.Maximum = 10000;
             this.prgT1.Name = "prgT1";
             this.prgT1.Size = new System.Drawing.Size(176, 14);
@@ -93,55 +94,58 @@
             // 
             // prgT2
             // 
-            this.prgT2.Location = new System.Drawing.Point(195, 109);
+            this.prgT2.Location = new System.Drawing.Point(195, 143);
             this.prgT2.Name = "prgT2";
             this.prgT2.Size = new System.Drawing.Size(176, 14);
             this.prgT2.TabIndex = 2;
             // 
             // prgT3
             // 
-            this.prgT3.Location = new System.Drawing.Point(377, 109);
+            this.prgT3.Location = new System.Drawing.Point(377, 143);
             this.prgT3.Name = "prgT3";
             this.prgT3.Size = new System.Drawing.Size(176, 14);
             this.prgT3.TabIndex = 2;
             // 
             // prgCycle
             // 
-            this.prgCycle.Location = new System.Drawing.Point(13, 129);
+            this.prgCycle.Location = new System.Drawing.Point(13, 163);
             this.prgCycle.Name = "prgCycle";
             this.prgCycle.Size = new System.Drawing.Size(540, 14);
             this.prgCycle.TabIndex = 2;
             // 
             // txtT1Count
             // 
-            this.txtT1Count.Location = new System.Drawing.Point(51, 83);
+            this.txtT1Count.Location = new System.Drawing.Point(51, 117);
             this.txtT1Count.Name = "txtT1Count";
             this.txtT1Count.ReadOnly = true;
             this.txtT1Count.Size = new System.Drawing.Size(100, 20);
             this.txtT1Count.TabIndex = 3;
+            this.txtT1Count.TabStop = false;
             this.txtT1Count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtT2Count
             // 
-            this.txtT2Count.Location = new System.Drawing.Point(233, 83);
+            this.txtT2Count.Location = new System.Drawing.Point(233, 117);
             this.txtT2Count.Name = "txtT2Count";
             this.txtT2Count.ReadOnly = true;
             this.txtT2Count.Size = new System.Drawing.Size(100, 20);
             this.txtT2Count.TabIndex = 3;
+            this.txtT2Count.TabStop = false;
             this.txtT2Count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtT3Count
             // 
-            this.txtT3Count.Location = new System.Drawing.Point(415, 83);
+            this.txtT3Count.Location = new System.Drawing.Point(415, 117);
             this.txtT3Count.Name = "txtT3Count";
             this.txtT3Count.ReadOnly = true;
             this.txtT3Count.Size = new System.Drawing.Size(100, 20);
             this.txtT3Count.TabIndex = 3;
+            this.txtT3Count.TabStop = false;
             this.txtT3Count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtCycleSet
             // 
-            this.txtCycleSet.Location = new System.Drawing.Point(233, 149);
+            this.txtCycleSet.Location = new System.Drawing.Point(233, 183);
             this.txtCycleSet.MaxLength = 10;
             this.txtCycleSet.Name = "txtCycleSet";
             this.txtCycleSet.Size = new System.Drawing.Size(100, 20);
@@ -151,7 +155,7 @@
             // 
             // txtT1Set
             // 
-            this.txtT1Set.Location = new System.Drawing.Point(51, 60);
+            this.txtT1Set.Location = new System.Drawing.Point(51, 94);
             this.txtT1Set.MaxLength = 10;
             this.txtT1Set.Name = "txtT1Set";
             this.txtT1Set.Size = new System.Drawing.Size(100, 20);
@@ -161,7 +165,7 @@
             // 
             // txtT2Set
             // 
-            this.txtT2Set.Location = new System.Drawing.Point(233, 60);
+            this.txtT2Set.Location = new System.Drawing.Point(233, 94);
             this.txtT2Set.MaxLength = 10;
             this.txtT2Set.Name = "txtT2Set";
             this.txtT2Set.Size = new System.Drawing.Size(100, 20);
@@ -171,7 +175,7 @@
             // 
             // txtT3Set
             // 
-            this.txtT3Set.Location = new System.Drawing.Point(415, 60);
+            this.txtT3Set.Location = new System.Drawing.Point(415, 94);
             this.txtT3Set.MaxLength = 10;
             this.txtT3Set.Name = "txtT3Set";
             this.txtT3Set.Size = new System.Drawing.Size(100, 20);
@@ -181,16 +185,17 @@
             // 
             // txtCycleCount
             // 
-            this.txtCycleCount.Location = new System.Drawing.Point(233, 172);
+            this.txtCycleCount.Location = new System.Drawing.Point(233, 206);
             this.txtCycleCount.Name = "txtCycleCount";
             this.txtCycleCount.ReadOnly = true;
             this.txtCycleCount.Size = new System.Drawing.Size(100, 20);
             this.txtCycleCount.TabIndex = 3;
+            this.txtCycleCount.TabStop = false;
             this.txtCycleCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(175, 11);
+            this.btnExit.Location = new System.Drawing.Point(480, 12);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 2;
@@ -201,7 +206,7 @@
             // lblFocus
             // 
             this.lblFocus.AutoSize = true;
-            this.lblFocus.Location = new System.Drawing.Point(446, 229);
+            this.lblFocus.Location = new System.Drawing.Point(446, 266);
             this.lblFocus.Name = "lblFocus";
             this.lblFocus.Size = new System.Drawing.Size(69, 13);
             this.lblFocus.TabIndex = 7;
@@ -211,7 +216,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(80, 45);
+            this.label1.Location = new System.Drawing.Point(80, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 8;
@@ -221,7 +226,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(259, 45);
+            this.label2.Location = new System.Drawing.Point(259, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 8;
@@ -231,7 +236,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(441, 45);
+            this.label3.Location = new System.Drawing.Point(441, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 8;
@@ -241,7 +246,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(251, 193);
+            this.label4.Location = new System.Drawing.Point(251, 227);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 8;
@@ -255,23 +260,35 @@
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
-            // lblMessageCentre
+            // label5
             // 
-            this.lblMessageCentre.AutoSize = true;
-            this.lblMessageCentre.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessageCentre.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMessageCentre.Location = new System.Drawing.Point(12, 216);
-            this.lblMessageCentre.Name = "lblMessageCentre";
-            this.lblMessageCentre.Size = new System.Drawing.Size(98, 13);
-            this.lblMessageCentre.TabIndex = 8;
-            this.lblMessageCentre.Text = "Message Centre";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label5.Location = new System.Drawing.Point(12, 247);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Message Centre";
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.lblTitle.Location = new System.Drawing.Point(12, 12);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(217, 24);
+            this.lblTitle.TabIndex = 9;
+            this.lblTitle.Text = "Power Cycling Control";
             // 
             // frmPowerCycling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 261);
-            this.Controls.Add(this.lblMessageCentre);
+            this.ClientSize = new System.Drawing.Size(566, 301);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -332,7 +349,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
-        private System.Windows.Forms.Label lblMessageCentre;
+        private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label lblTitle;
     }
 }
 
