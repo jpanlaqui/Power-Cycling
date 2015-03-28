@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TotalPhase;
 using PowerCycling;
 using System.Threading;
+using System.Drawing.Drawing2D;
 
 namespace PowerCycling
 {
@@ -280,6 +281,163 @@ namespace PowerCycling
             public FourUintData(uint r1, uint r2, uint r3, uint r4) : base(r1, r2, r3, r4)
             {
             }
+        }
+        /*==============================================================================================================
+        | Description: UI drawings
+        ==============================================================================================================*/
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            //Cordinates of the line
+            int x1, y1, x2, y2;
+            const int WAVEFORM_WITDH = 3;
+            const int COORDINATE_LINE_WITDH = 2;
+            const int DIMENSION_LINE_WIDTH = 1;
+	
+
+            //Initialize the pens lines
+            Pen pen = new Pen(Color.Black, DIMENSION_LINE_WIDTH);
+  
+            //Initialize the pens and end/start caps
+            AdjustableArrowCap bigArrow = new AdjustableArrowCap(5, 5);
+            AdjustableArrowCap smallArrow = new AdjustableArrowCap(3, 3);
+            AdjustableArrowCap none = new AdjustableArrowCap(1, 1);
+
+
+			
+			
+
+		//----------------------------------------------------------
+            //Line with arrow endcap pointing to the north
+            pen.Color = Color.Black;
+            pen.Width = COORDINATE_LINE_WITDH;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = bigArrow;
+            x1 = 20; x2 = 20;
+            y1 = 200; y2 = 50;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Line with arrow endcap pointing to the left
+            pen.Color = Color.Black;
+            pen.Width = COORDINATE_LINE_WITDH;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = bigArrow;
+            x1 = 18; x2 = 585;
+            y1 = 200; y2 = 200;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+		//----------------------------------------------------------				
+            //Normal line -- Horizontal
+            pen.Width = WAVEFORM_WITDH;
+            pen.Color = Color.Blue;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = none;
+            x1 = 20; x2 = 208;
+            y1 = 105; y2 = 105;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Normal line -- Horizontal
+            pen.Width = WAVEFORM_WITDH;
+            pen.Color = Color.Blue;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = none;
+            x1 = 205; x2 = 387;
+            y1 = 198; y2 = 198;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Normal line -- Horizontal
+            pen.Width = WAVEFORM_WITDH;
+            pen.Color = Color.Blue;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = none;
+            x1 = 385; x2 = 570;
+            y1 = 105; y2 = 105;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Normal line - Vertical
+            pen.Width = WAVEFORM_WITDH;
+            pen.Color = Color.Blue;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = none;
+            x1 = 205; x2 = 205;
+            y1 = 103; y2 = 200;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Normal line - Vertical
+            pen.Width = WAVEFORM_WITDH;
+            pen.Color = Color.Blue;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = none;
+            x1 = 386; x2 = 386;
+            y1 = 103; y2 = 200;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+		//----------------------------------------------------------	
+            //Normal line - Vertical
+            pen.Width = DIMENSION_LINE_WIDTH;
+            pen.Color = Color.Black;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = none;
+            x1 = 205; x2 = 205;
+            y1 = 103; y2 = 80;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Normal line - Vertical
+            pen.Width = DIMENSION_LINE_WIDTH;
+            pen.Color = Color.Black;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = none;
+            x1 = 387; x2 = 387;
+            y1 = 103; y2 = 80;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Normal line - Vertical
+            pen.Width = DIMENSION_LINE_WIDTH;
+            pen.Color = Color.Black;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = none;
+            x1 = 571; x2 = 571;
+            y1 = 255; y2 = 80;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Normal line - Vertical
+            pen.Width = DIMENSION_LINE_WIDTH;
+            pen.Color = Color.Black;
+            pen.CustomStartCap = none;
+            pen.CustomEndCap = none;
+            x1 = 20; x2 = 20;
+            y1 = 255; y2 = 80;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+		//----------------------------------------------------------
+            //Line with arrow endcap pointing to the left/Right
+            pen.Color = Color.Red;
+            pen.Width = DIMENSION_LINE_WIDTH;
+            pen.CustomStartCap = smallArrow;
+            pen.CustomEndCap = smallArrow;
+            x1 = 21; x2 = 205;
+            y1 = 92; y2 = 92;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Line with arrow endcap pointing to the left/Right
+            pen.Color = Color.Red;
+            pen.Width = DIMENSION_LINE_WIDTH;
+            pen.CustomStartCap = smallArrow;
+            pen.CustomEndCap = smallArrow;
+            x1 = 207; x2 = 386;
+            y1 = 92; y2 = 92;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Line with arrow endcap pointing to the left/Right
+            pen.Color = Color.Red;
+            pen.Width = DIMENSION_LINE_WIDTH;
+            pen.CustomStartCap = smallArrow;
+            pen.CustomEndCap = smallArrow;
+            x1 = 387; x2 = 570;
+            y1 = 92; y2 = 92;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+            //Line with arrow endcap pointing to the left/Right
+            pen.Color = Color.Red;
+            pen.Width = DIMENSION_LINE_WIDTH;
+            pen.CustomStartCap = smallArrow;
+            pen.CustomEndCap = smallArrow;
+            x1 = 21; x2 = 570;
+            y1 = 245; y2 = 245;
+            e.Graphics.DrawLine(pen, x1, y1, x2, y2);	
+			
+			
+			
+			
+			
+			
+			
+			
         }
     }
 }

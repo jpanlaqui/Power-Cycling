@@ -56,7 +56,7 @@
             // 
             // btnMonitor
             // 
-            this.btnMonitor.Location = new System.Drawing.Point(318, 12);
+            this.btnMonitor.Location = new System.Drawing.Point(350, 12);
             this.btnMonitor.Name = "btnMonitor";
             this.btnMonitor.Size = new System.Drawing.Size(75, 23);
             this.btnMonitor.TabIndex = 0;
@@ -67,16 +67,16 @@
             // txtMessageCentre
             // 
             this.txtMessageCentre.AcceptsReturn = true;
-            this.txtMessageCentre.Location = new System.Drawing.Point(12, 263);
+            this.txtMessageCentre.Location = new System.Drawing.Point(114, 289);
             this.txtMessageCentre.Name = "txtMessageCentre";
             this.txtMessageCentre.ReadOnly = true;
-            this.txtMessageCentre.Size = new System.Drawing.Size(541, 20);
+            this.txtMessageCentre.Size = new System.Drawing.Size(452, 20);
             this.txtMessageCentre.TabIndex = 1;
             this.txtMessageCentre.TabStop = false;
             // 
             // btnWrite
             // 
-            this.btnWrite.Location = new System.Drawing.Point(399, 12);
+            this.btnWrite.Location = new System.Drawing.Point(431, 12);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(75, 23);
             this.btnWrite.TabIndex = 1;
@@ -86,7 +86,7 @@
             // 
             // prgT1
             // 
-            this.prgT1.Location = new System.Drawing.Point(13, 143);
+            this.prgT1.Location = new System.Drawing.Point(26, 132);
             this.prgT1.Maximum = 10000;
             this.prgT1.Name = "prgT1";
             this.prgT1.Size = new System.Drawing.Size(176, 14);
@@ -94,28 +94,28 @@
             // 
             // prgT2
             // 
-            this.prgT2.Location = new System.Drawing.Point(195, 143);
+            this.prgT2.Location = new System.Drawing.Point(208, 132);
             this.prgT2.Name = "prgT2";
             this.prgT2.Size = new System.Drawing.Size(176, 14);
             this.prgT2.TabIndex = 2;
             // 
             // prgT3
             // 
-            this.prgT3.Location = new System.Drawing.Point(377, 143);
+            this.prgT3.Location = new System.Drawing.Point(390, 132);
             this.prgT3.Name = "prgT3";
             this.prgT3.Size = new System.Drawing.Size(176, 14);
             this.prgT3.TabIndex = 2;
             // 
             // prgCycle
             // 
-            this.prgCycle.Location = new System.Drawing.Point(13, 163);
+            this.prgCycle.Location = new System.Drawing.Point(26, 204);
             this.prgCycle.Name = "prgCycle";
             this.prgCycle.Size = new System.Drawing.Size(540, 14);
             this.prgCycle.TabIndex = 2;
             // 
             // txtT1Count
             // 
-            this.txtT1Count.Location = new System.Drawing.Point(51, 117);
+            this.txtT1Count.Location = new System.Drawing.Point(64, 109);
             this.txtT1Count.Name = "txtT1Count";
             this.txtT1Count.ReadOnly = true;
             this.txtT1Count.Size = new System.Drawing.Size(100, 20);
@@ -125,7 +125,7 @@
             // 
             // txtT2Count
             // 
-            this.txtT2Count.Location = new System.Drawing.Point(233, 117);
+            this.txtT2Count.Location = new System.Drawing.Point(246, 109);
             this.txtT2Count.Name = "txtT2Count";
             this.txtT2Count.ReadOnly = true;
             this.txtT2Count.Size = new System.Drawing.Size(100, 20);
@@ -135,7 +135,7 @@
             // 
             // txtT3Count
             // 
-            this.txtT3Count.Location = new System.Drawing.Point(415, 117);
+            this.txtT3Count.Location = new System.Drawing.Point(428, 109);
             this.txtT3Count.Name = "txtT3Count";
             this.txtT3Count.ReadOnly = true;
             this.txtT3Count.Size = new System.Drawing.Size(100, 20);
@@ -145,7 +145,7 @@
             // 
             // txtCycleSet
             // 
-            this.txtCycleSet.Location = new System.Drawing.Point(233, 183);
+            this.txtCycleSet.Location = new System.Drawing.Point(246, 236);
             this.txtCycleSet.MaxLength = 10;
             this.txtCycleSet.Name = "txtCycleSet";
             this.txtCycleSet.Size = new System.Drawing.Size(100, 20);
@@ -155,7 +155,7 @@
             // 
             // txtT1Set
             // 
-            this.txtT1Set.Location = new System.Drawing.Point(51, 94);
+            this.txtT1Set.Location = new System.Drawing.Point(64, 82);
             this.txtT1Set.MaxLength = 10;
             this.txtT1Set.Name = "txtT1Set";
             this.txtT1Set.Size = new System.Drawing.Size(100, 20);
@@ -165,7 +165,7 @@
             // 
             // txtT2Set
             // 
-            this.txtT2Set.Location = new System.Drawing.Point(233, 94);
+            this.txtT2Set.Location = new System.Drawing.Point(246, 82);
             this.txtT2Set.MaxLength = 10;
             this.txtT2Set.Name = "txtT2Set";
             this.txtT2Set.Size = new System.Drawing.Size(100, 20);
@@ -175,7 +175,7 @@
             // 
             // txtT3Set
             // 
-            this.txtT3Set.Location = new System.Drawing.Point(415, 94);
+            this.txtT3Set.Location = new System.Drawing.Point(428, 82);
             this.txtT3Set.MaxLength = 10;
             this.txtT3Set.Name = "txtT3Set";
             this.txtT3Set.Size = new System.Drawing.Size(100, 20);
@@ -185,7 +185,7 @@
             // 
             // txtCycleCount
             // 
-            this.txtCycleCount.Location = new System.Drawing.Point(233, 206);
+            this.txtCycleCount.Location = new System.Drawing.Point(246, 259);
             this.txtCycleCount.Name = "txtCycleCount";
             this.txtCycleCount.ReadOnly = true;
             this.txtCycleCount.Size = new System.Drawing.Size(100, 20);
@@ -195,7 +195,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(480, 12);
+            this.btnExit.Location = new System.Drawing.Point(512, 12);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 2;
@@ -206,7 +206,7 @@
             // lblFocus
             // 
             this.lblFocus.AutoSize = true;
-            this.lblFocus.Location = new System.Drawing.Point(446, 266);
+            this.lblFocus.Location = new System.Drawing.Point(478, 291);
             this.lblFocus.Name = "lblFocus";
             this.lblFocus.Size = new System.Drawing.Size(69, 13);
             this.lblFocus.TabIndex = 7;
@@ -216,7 +216,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(80, 79);
+            this.label1.Location = new System.Drawing.Point(93, 67);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 8;
@@ -226,7 +226,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(259, 79);
+            this.label2.Location = new System.Drawing.Point(272, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 8;
@@ -236,7 +236,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(441, 79);
+            this.label3.Location = new System.Drawing.Point(454, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 8;
@@ -246,7 +246,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(251, 227);
+            this.label4.Location = new System.Drawing.Point(264, 221);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 8;
@@ -265,7 +265,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label5.Location = new System.Drawing.Point(12, 247);
+            this.label5.Location = new System.Drawing.Point(15, 292);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 13);
             this.label5.TabIndex = 8;
@@ -286,7 +286,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 295);
+            this.ClientSize = new System.Drawing.Size(595, 319);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
