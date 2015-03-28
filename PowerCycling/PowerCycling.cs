@@ -209,7 +209,7 @@ namespace PowerCycling
                     /*Update the backgroundworker progress change*/
                     backgroundWorker.ReportProgress(i, new FourUintData(uintT1Count, uintT2Count,
                                                     uintT3Count, uintCycleCount));
-                    Thread.Sleep(1);
+                    Thread.Sleep(15);
                 }
             }
             e.Result = "Monitoring power cycling... done!";
