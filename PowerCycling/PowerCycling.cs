@@ -27,14 +27,14 @@ namespace PowerCycling
         private PowerCyclingCom I2CReadWrite = new PowerCyclingCom();
 
         /*==============================================================================================================
-        | Description: 
+        | Description: Starts the winform
         ==============================================================================================================*/
         public frmPowerCycling()
         {
             InitializeComponent();
         }
         /*==============================================================================================================
-        | Description: 
+        | Description: Initialize the winform
         ==============================================================================================================*/
         private void frmPowerCycling_Load(object sender, EventArgs e)
         {
@@ -46,7 +46,7 @@ namespace PowerCycling
 
         }
         /*==============================================================================================================
-        | Description: 
+        | Description: Monitor the status of the power cycling parameters
         ==============================================================================================================*/
         private void btnMonitor_Click(object sender, EventArgs e)
         {
@@ -97,7 +97,7 @@ namespace PowerCycling
             }
         }
         /*==============================================================================================================
-        | Description: 
+        | Description: Write power cycling parameters
         ==============================================================================================================*/
         private void btnWrite_Click(object sender, EventArgs e)
         {
@@ -292,7 +292,6 @@ namespace PowerCycling
             const int WAVEFORM_WITDH = 3;
             const int COORDINATE_LINE_WITDH = 2;
             const int DIMENSION_LINE_WIDTH = 1;
-	
 
             //Initialize the pens lines
             Pen pen = new Pen(Color.Black, DIMENSION_LINE_WIDTH);
@@ -301,10 +300,6 @@ namespace PowerCycling
             AdjustableArrowCap bigArrow = new AdjustableArrowCap(5, 5);
             AdjustableArrowCap smallArrow = new AdjustableArrowCap(3, 3);
             AdjustableArrowCap none = new AdjustableArrowCap(1, 1);
-
-
-			
-			
 
 		//----------------------------------------------------------
             //Line with arrow endcap pointing to the north
@@ -430,14 +425,6 @@ namespace PowerCycling
             x1 = 21; x2 = 570;
             y1 = 245; y2 = 245;
             e.Graphics.DrawLine(pen, x1, y1, x2, y2);	
-			
-			
-			
-			
-			
-			
-			
-			
         }
     }
 }
